@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Answer\AnswerController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -27,4 +28,5 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/questions', [QuestionController::class, 'index']);
+    Route::post('/answer-questions', [AnswerController::class, 'store']);
 });
