@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CalorieController extends Controller
 {
@@ -56,6 +58,41 @@ class CalorieController extends Controller
         return response()->json([
             'type' => $type,
             'result' => round($result, 2),
+        ]);
+    }
+
+    public function analysis()
+    {
+        $userId = Auth::user()->id;
+        $answers = Answer::where('user_id', $userId)->first();
+        $bmi = null;
+        $water = null;
+        $protein = null;
+        $bmr = null;
+
+        // Prevent division by zero
+        if (!empty($answers->height) && $answers->height > 0) {
+            $bmi = $answers->weight / ($answers->height * $answers->height);
+        }
+
+        if (!empty($answers->weight)) {
+            $water = $answers->weight * 0.03;
+            $protein = $answers->weight * 1.75;
+        }
+
+        if (!empty($answers->weight) && !empty($answers->height) && !empty($answers->age) && !empty($answers->sex)) {
+            if ($answers->sex === 'male') {
+                $bmr = 10 * $answers->weight + 6.25 * $answers->height - 5 * $answers->age + 5;
+            } else {
+                $bmr = 10 * $answers->weight + 6.25 * $answers->height - 5 * $answers->age - 161;
+            }
+        }
+
+        return response()->json([
+            'bmi' => $bmi !== null ? round($bmi, 2) : null,
+            'water' => $water !== null ? round($water, 2) : null,
+            'protein' => $protein !== null ? round($protein, 2) : null,
+            'bmr' => $bmr !== null ? round($bmr, 2) : null,
         ]);
     }
 }

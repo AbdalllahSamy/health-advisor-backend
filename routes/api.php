@@ -32,4 +32,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/questions', [QuestionController::class, 'index']);
     Route::post('/answer-questions', [AnswerController::class, 'store']);
+    Route::get('analysis', [CalorieController::class, 'analysis']);
 });
