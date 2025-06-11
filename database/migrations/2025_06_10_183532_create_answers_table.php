@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('level')->nullable();
             $table->string('fitness_goal')->nullable();
             $table->string('fitness_type')->nullable();
-            $table->integer('walk')->nullable();
+            $table->float('walk')->nullable();
             $table->timestamps();
         });
     }
