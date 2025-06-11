@@ -63,8 +63,8 @@ class CalorieController extends Controller
 
     public function analysis()
     {
-        $userId = Auth::user()->id;
-        $answers = Answer::where('user_id', $userId)->first();
+        $user = Auth::user();
+        $answers = Answer::where('user_id', $user->id)->first();
         $bmi = null;
         $water = null;
         $protein = null;
@@ -93,6 +93,14 @@ class CalorieController extends Controller
             'water' => $water !== null ? round($water, 2) : null,
             'protein' => $protein !== null ? round($protein, 2) : null,
             'bmr' => $bmr !== null ? round($bmr, 2) : null,
+            'user' => [
+                'name' => $user->name,
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'height' => $answers->height,
+                'weight' => $answers->weight,
+                'fitness_goal' => $answers->fitness_goal
+            ],
         ]);
     }
 }
