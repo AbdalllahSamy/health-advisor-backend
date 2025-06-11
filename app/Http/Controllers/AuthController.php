@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,8 +18,9 @@ class AuthController extends Controller
         if (!$token = JWTAuth::attempt($credentials)) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
+        $answers = Answer::where('user_id', $request->user()->id)->first();
 
-        return response()->json(['token' => $token]);
+        return response()->json(['token' => $token, 'is_frist_login' => $answers ? 1 : 0]);
     }
 
     public function register(Request $request)
