@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
@@ -22,12 +23,21 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        $validator = Validator::make($request->all() ,[
+            'password' => 'required|confirmed',
+            'phone' => 'required',
+            'email' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required'
+        ]);
+        if($validator->failed()){
+            return response()->json(['erorr' => $validator->errors()]);
+        }
         $user = User::create([
-            'name'     => $request->name,
+            'name'     => $request->first_name . " " . $request->last_name,
             'email'    => $request->email,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
-            'height' => $request->height,
-            'weight' => $request->weight
         ]);
 
         $token = JWTAuth::fromUser($user);
