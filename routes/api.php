@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
-Route::post('/calculate-calories', [CalorieController::class, 'calculate']);
+Route::post('calculate-calories', [CalorieController::class, 'calculate']);
 
 
 Route::middleware('auth:api')->group(function () {
