@@ -20,6 +20,7 @@ class AnswerController extends Controller
             'level' => 'nullable|string',
             'fitness_goal' => 'nullable|string',
             'fitness_type' => 'nullable|string',
+            'walk' => 'nullable|numeric'
         ]);
 
         $answer = Answer::create([

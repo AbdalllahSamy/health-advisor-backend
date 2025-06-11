@@ -77,7 +77,7 @@ class CalorieController extends Controller
 
         if (!empty($answers->weight)) {
             $water = $answers->weight * 0.03;
-            $protein = $answers->weight * ($answers->hypertension === "yes" ? 1.75 : 1.2);
+            $protein = $answers->weight * ($answers->walk );
         }
 
         if (!empty($answers->weight) && !empty($answers->height) && !empty($answers->age) && !empty($answers->sex)) {

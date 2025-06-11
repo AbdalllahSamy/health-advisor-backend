@@ -19,5 +19,6 @@ class Answer extends Model
         'level',
         'fitness_goal',
         'fitness_type',
+        'walk'
     ];
 }
