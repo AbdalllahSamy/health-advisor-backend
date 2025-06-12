@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Answer\AnswerController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CalorieController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\SettingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -39,4 +40,5 @@ Route::middleware('auth:api')->group(function () {
     Route::get('analysis', [CalorieController::class, 'analysis']);
     Route::get('weeks-plans', [AnswerController::class, 'plans']);
     Route::get('weeks-plans/{id}', [AnswerController::class, 'plansById']);
+    Route::resource('post', PostController::class);
 });
