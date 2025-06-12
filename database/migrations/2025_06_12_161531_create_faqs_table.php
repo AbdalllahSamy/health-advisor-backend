@@ -11,12 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('weekly_plans', function (Blueprint $table) {
+        Schema::create('faqs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('answer_id')->constrained()->onDelete('cascade');
-            $table->string('type');
-            $table->json('plan');
+            $table->string('question');
+            $table->text('answer');
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('weekly_plans');
+        Schema::dropIfExists('faqs');
     }
 };
