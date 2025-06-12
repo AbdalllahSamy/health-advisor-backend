@@ -33,4 +33,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/questions', [QuestionController::class, 'index']);
     Route::post('/answer-questions', [AnswerController::class, 'store']);
     Route::get('analysis', [CalorieController::class, 'analysis']);
+    Route::get('weeks-plans', [AnswerController::class, 'plans']);
+    Route::get('weeks-plans/{id}', [AnswerController::class, 'plansById']);
 });
