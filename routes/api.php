@@ -28,6 +28,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::get('faq', [SettingController::class, 'faq']);
 Route::get('gallary', [SettingController::class, 'gallary']);
 Route::post('calculate-calories', [CalorieController::class, 'calculate']);
+Route::post('contact', [SettingController::class, 'contact']);
 
 
 Route::middleware('auth:api')->group(function () {

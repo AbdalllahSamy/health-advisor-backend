@@ -53,8 +53,8 @@ class AnswerController extends Controller
                 "days_per_week" => $request->days_per_week,
                 "workout_duration_minutes" => $request->workout_duration_minutes,
                 "has_gym_access" => $request->has_gym_access,
-                "home_equipment" => [""],
-                "preferred_language" => "english"
+                // "home_equipment" => [""],
+                // "preferred_language" => "english"
             ]);
         }
 
