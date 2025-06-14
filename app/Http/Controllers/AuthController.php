@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Answer;
 use App\Models\User;
+use App\Models\WeeklyPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -19,8 +20,9 @@ class AuthController extends Controller
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
         $answers = Answer::where('user_id', $request->user()->id)->first();
+        $week_plan = WeeklyPlan::where('user_id', $request->user()->id)->first();
 
-        return response()->json(['token' => $token, 'is_frist_login' => $answers ? 1 : 0]);
+        return response()->json(['token' => $token, 'is_frist_login' => $answers ? 1 : 0, 'is_gym_only' => $week_plan->type === "gym_only" ? "gym_only" : "not_gym_only"]);
     }
 
     public function register(Request $request)

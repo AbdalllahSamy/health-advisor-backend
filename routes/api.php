@@ -37,6 +37,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/questions', [QuestionController::class, 'index']);
     Route::post('/answer-questions', [AnswerController::class, 'store']);
+    Route::post('/mark-exercise-done/{planId}/{dayId}/{exerciseId}', [AnswerController::class, 'markExerciseAsDone']);
+    Route::post('/weekly-plan/{planId}/day/{dayId}/feedback', [AnswerController::class, 'setDayFeedback']);
     Route::get('analysis', [CalorieController::class, 'analysis']);
     Route::get('weeks-plans', [AnswerController::class, 'plans']);
     Route::get('weeks-plans/{id}', [AnswerController::class, 'plansById']);

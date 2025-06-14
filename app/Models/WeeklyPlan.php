@@ -12,6 +12,7 @@ class WeeklyPlan extends Model
         'user_id',
         'answer_id',
         'plan',
+        'type'
     ];
 
     protected $casts = [
